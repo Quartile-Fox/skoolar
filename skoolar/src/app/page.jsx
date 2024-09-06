@@ -44,7 +44,7 @@ const testimonials = [
   },
   {
     quote:
-      "Using Skoolar has been a game-changer for me as a parent. The direct messaging feature with teachers allows me to keep a close eye on my child's progress and assignments in real-time. Knowing what my child is working on at school makes them feel more supported, and it enhances our ability to stay connected. Skoolar makes it easy to communicate and track my child's achievements, helping me be more engaged in their educational journey.",
+      "As a parent, Skoolar has truly revolutionized how I interact with my child's education. The direct messaging feature with teachers has been invaluable, allowing me to monitor my child's progress and assignments instantly. Being aware of what my child is working on in school not only makes them feel more supported but also strengthens our connection. Skoolar simplifies communication and tracking, which has significantly enhanced my involvement in their learning journey. It's a fantastic tool for staying engaged and informed about my child's educational achievements.",
     name: "Fajri",
     role: "Dylan parents",
     avatar: "/fajri.jpg",
@@ -90,11 +90,9 @@ export default function Home() {
       <div className="min-h-screen bg-white flex flex-col">
         <header className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold text-[#2B478B] mr-6">Skoolar</div>{" "}
-          {/* Tambahkan mr-6 untuk jarak */}
           <nav className="hidden md:block">
             <ul className="flex space-x-6 text-[#2B478B] text-base">
               {" "}
-              {/* Ubah space-x-4 menjadi space-x-6 */}
               <li>
                 <Link href="#footer" className="hover:text-[#1E3A8A]">
                   Home
@@ -116,7 +114,7 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <Link href="#reviews" className="hover:text-[#1E3A8A]">
+                <Link href="#review" className="hover:text-[#1E3A8A]">
                   Reviews
                 </Link>
               </li>
@@ -292,7 +290,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="reviews" className="py-16 bg-gray-50">
+          <section id="review" className="py-16 bg-gray-50">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -381,7 +379,7 @@ export default function Home() {
                   </li>
                   <li>
                     <Link href="#" className="text-gray-400 hover:text-white">
-                      Pricing
+                      Pricese
                     </Link>
                   </li>
                   <li>
