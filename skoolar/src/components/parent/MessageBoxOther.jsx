@@ -16,8 +16,9 @@ export default function MessageBoxOther({ text, sender }) {
     getOther(sender);
   }, []);
   return (
+    //asdawdawdaw
     <>
-      <div className="col-start-1 col-end-8 p-3 rounded-lg">
+      <div className="col-start-1 col-end-8  p-3 rounded-lg">
         <div className="flex flex-row">
           <div className="flex items-center justify-center text-white h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
             A
