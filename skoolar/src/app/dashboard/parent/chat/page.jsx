@@ -1,8 +1,9 @@
 import ChatRoom from "../../../../components/parent/ChatRoom";
-import ChatBox from "../../../../components/teacher/Chatbox";
+import ChatBox from "../../../../components/parent/Chatbox";
 import SideBar from "../../../../components/parent/Sidebar";
-
-export default function ChatPage() {
+import { getAllGroup } from "./action";
+export default async function ChatPage() {
+  const { data } = await getAllGroup();
   return (
     <>
       <div className="w-full flex gap-3 px-5 py-10 h-screen bg-[#F1F7FE]">
@@ -19,8 +20,13 @@ export default function ChatPage() {
               <p className="ml-8 mt-3 mb-2 text-xs text-neutral-400">
                 Group chat
               </p>
-              <ChatBox />
-              <ChatBox />
+              {data?.map((groups) => {
+                return (
+                  <>
+                    <ChatBox data={groups} />
+                  </>
+                );
+              })}
             </div>
             <div>
               <p className="ml-8 mt-7 mb-2 text-xs text-neutral-400">

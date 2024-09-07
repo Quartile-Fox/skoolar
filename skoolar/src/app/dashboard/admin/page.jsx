@@ -11,29 +11,13 @@ export default function InsertGroupMessage() {
   const [userId, setUserId] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date().toISOString());
 
-  async function get(id) {
-    const getChats = await getAllMessagesByGroupId(1);
+  async function get() {
+    const getChats = await getAllMessagesByGroupId();
+    console.log(getChats);
   }
-
-  const handleInsertMessage = async () => {
-    try {
-      const data = await createGroupMessage({
-        group_id: channelId,
-        content,
-        created_at: new Date(createdAt),
-        message_id: messageId,
-        user_id: userId,
-      });
-      setChannelId("");
-      setContent("");
-      setMessageId("");
-      setUserId("");
-      console.log(data);
-    } catch (error) {
-      alert("Error creating group message.");
-    }
-  };
-
+  // async function get(id) {
+  //   await getAllMessagesByGroupId(1);
+  // }
   return (
     <div>
       <input
@@ -64,7 +48,7 @@ export default function InsertGroupMessage() {
         value={createdAt}
         onChange={(e) => setCreatedAt(e.target.value)}
       />
-      <button onClick={handleInsertMessage}>Insert Group Message</button>
+      <button onClick={get}>Insert Group Message</button>
     </div>
   );
 }
