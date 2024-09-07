@@ -50,7 +50,6 @@ export async function getAllMessagesByGroupId(groupId) {
 //     throw error;
 //   }
 // }
-
 export async function getAllGroup() {
   try {
     const res = await fetch("http://localhost:3000/api/group", {
