@@ -42,7 +42,9 @@ export default function Pengumuman() {
           className="w-full py-4 flex items-center gap-3 overflow-x-auto bg-none rounded-2xl"
           id="scroll-container"
         >
-          <div className="w-[15rem] h-[10rem] bg-white flex-shrink-0 rounded-2xl"></div>
+          <div className="w-[15rem] h-[10rem] bg-white flex-shrink-0 rounded-2xl text-black font-medium text-2xl p-5">
+            School Fair!
+          </div>
           <div className="w-[15rem] h-[10rem] bg-white flex-shrink-0 rounded-2xl"></div>
           <div className="w-[15rem] h-[10rem] bg-white flex-shrink-0 rounded-2xl"></div>
           <div className="w-[15rem] h-[10rem] bg-white flex-shrink-0 rounded-2xl"></div>
