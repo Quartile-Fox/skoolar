@@ -10,7 +10,6 @@ export const getDb = async () => {
 };
 
 export const getUser = async () => {
-  console.log("ini di model");
 
   const db = await getDb();
 
@@ -41,11 +40,14 @@ export const deleteUserById = async (id) => {
 };
 
 export const createUser = async (user) => {
+  console.log(user, " <<<di model create user nich <<<");
   const modifiedUser = {
     ...user,
     role: "teacher",
     password: hashingPassword(user.password),
   };
+
+
   const db = await getDb();
   const result = await db.collection(COLLECTION_USER).insertOne(modifiedUser);
 
