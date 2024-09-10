@@ -16,7 +16,7 @@ export default async function page() {
   if (!session) {
     return (
       <>
-        <h1>You've not login yet bruv</h1>
+        <h1>Youve not login yet bruv</h1>
         <form
           action={async () => {
             "use server";
