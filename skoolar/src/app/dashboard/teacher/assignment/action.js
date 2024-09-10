@@ -1,9 +1,9 @@
 "use server";
 import { cookies } from "next/headers";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function getGroupByID(groupID) {
   try {
-    const res = await fetch(`http://localhost:3000/api/group/${groupID}`, {
+    const res = await fetch(`${BASE_URL}/api/group/${groupID}`, {
       cache: "no-store",
       method: "GET",
       headers: {

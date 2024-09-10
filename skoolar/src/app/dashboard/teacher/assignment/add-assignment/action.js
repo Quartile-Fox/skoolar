@@ -13,9 +13,24 @@ import { getMe } from "../../../parent/action";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+export async function getToken() {
+  try {
+    const store = cookies();
+    return store.get("access_token");
+  } catch (error) {
+    console.log(error);
+  }
+}
 // === ganti ===
 // ganti session jadi adaptor
-const session = await auth();
+
+export async function getSession() {
+  try {
+    return await auth();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const getCourse = async () => {
   if (!session || !session.accessToken) {

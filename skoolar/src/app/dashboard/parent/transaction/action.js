@@ -1,9 +1,9 @@
 "use server";
 import { cookies } from "next/headers";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function getTransactions() {
   try {
-    const res = await fetch("http://localhost:3000/api/transaction", {
+    const res = await fetch(`${BASE_URL}/api/transaction`, {
       cache: "no-store",
       method: "GET",
       headers: {
@@ -21,7 +21,7 @@ export async function getTransactions() {
 
 export async function createTransaction() {
   try {
-    const res = await fetch("http://localhost:3000/api/transaction", {
+    const res = await fetch(`${BASE_URL}/api/transaction`, {
       cache: "no-store",
       method: "POST",
       headers: {
@@ -38,7 +38,7 @@ export async function createTransaction() {
 }
 
 export async function updateTransaction(order_id) {
-  const res = await fetch(`http://localhost:3000/api/transaction`, {
+  const res = await fetch(`${BASE_URL}/api/transaction`, {
     method: "PATCH",
     headers: {
       Coookie: cookies().toString(),

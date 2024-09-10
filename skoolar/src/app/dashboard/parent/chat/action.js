@@ -12,7 +12,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function getUserId() {
   try {
     const cookieStore = cookies();
@@ -83,7 +83,7 @@ export async function sendMessage(groupId, messageData) {
 
 export async function getAllGroup() {
   try {
-    const res = await fetch("http://localhost:3000/api/group", {
+    const res = await fetch(`${BASE_URL}/api/group`, {
       cache: "no-store",
       method: "GET",
       headers: {
@@ -105,7 +105,7 @@ export async function getAllGroup() {
 export async function getUserIdOther(id) {
   console.log(id);
   try {
-    const res = await fetch(`http://localhost:3000/api/parent/${id}`, {
+    const res = await fetch(`${BASE_URL}/api/parent/${id}`, {
       cache: "no-store",
       method: "GET",
       headers: {
@@ -127,7 +127,7 @@ export async function getUserIdOther(id) {
 export async function getTeaacherIdOther(id) {
   console.log(id);
   try {
-    const res = await fetch(`http://localhost:3000/api/parent/${id}`, {
+    const res = await fetch(`${BASE_URL}/api/parent/${id}`, {
       cache: "no-store",
       method: "GET",
       headers: {

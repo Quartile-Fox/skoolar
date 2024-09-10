@@ -1,9 +1,9 @@
 "use server";
 import { cookies } from "next/headers";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function getMe() {
   try {
-    const res = await fetch("http://localhost:3000/api/parent", {
+    const res = await fetch(`${BASE_URL}/api/parent`, {
       cache: "no-store",
       method: "GET",
       headers: {
@@ -37,7 +37,7 @@ export async function getMe() {
 
 export async function getAllGroup() {
   try {
-    const res = await fetch("http://localhost:3000/api/group", {
+    const res = await fetch(`${BASE_URL}/api/group`, {
       cache: "no-store",
       method: "GET",
       headers: {

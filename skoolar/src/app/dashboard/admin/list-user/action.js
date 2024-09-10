@@ -7,12 +7,12 @@ import { NextResponse } from "next/server";
 import { createParent } from "../../../../db/models/Parent";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/dist/server/api-utils";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 // import Swal from "sweetalert2";
 
 export async function getAllUser(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/user", {
+    const response = await fetch(`${BASE_URL}/api/user`, {
       headers: {
         Cookie: cookies().toString(),
       },
@@ -28,7 +28,7 @@ export async function getAllUser(params) {
 
 export async function getParent(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/parents", {
+    const response = await fetch(`${BASE_URL}/api/parents`, {
       headers: {
         Cookie: cookies().toString(),
       },
@@ -62,7 +62,7 @@ export async function postTeacher(formData) {
 
 export async function getGroup(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/getOneGroup", {
+    const response = await fetch(`${BASE_URL}/api/getOneGroup`, {
       headers: {
         Cookie: cookies().toString(),
       },
@@ -117,7 +117,7 @@ export async function postStudent(formData) {
 export async function GetTeachersClass(params) {
   try {
     console.log(params, "weh ini kemana jingg");
-    const response = await fetch(`http://localhost:3000/api/group/${params}`, {
+    const response = await fetch(`${BASE_URL}/api/group/${params}`, {
       headers: {
         Cookie: cookies().toString(),
       },

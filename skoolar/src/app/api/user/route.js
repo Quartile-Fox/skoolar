@@ -1,3 +1,4 @@
+"use server";
 import { NextResponse } from "next/server";
 import { getUser } from "../../../db/models/User";
 

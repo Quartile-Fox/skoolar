@@ -1,10 +1,11 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { createGroup } from "../../../../db/models/Group";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function getGroup(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/getOneGroup", {
+    const response = await fetch(`${BASE_URL}/api/getOneGroup`, {
       headers: {
         Cookie: cookies().toString(),
       },

@@ -1,3 +1,4 @@
+"use server";
 import { NextResponse } from "next/server";
 import Joi from "joi";
 import { getParentOrUser } from "../../../db/models/Parent";

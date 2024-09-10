@@ -1,3 +1,4 @@
+"use server";
 import { NextResponse } from "next/server";
 import { getAllGroup } from "../../../db/models/Group";
 

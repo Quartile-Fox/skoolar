@@ -1,29 +1,30 @@
-import { cookies } from "next/headers";
-import { createCourseWork, getCourse, getAllGroup } from "./action";
-import { auth, signIn, signOut } from "../../../../../auth";
+// app/dashboard/teacher/assignment/add-assignment/page.tsx
+
+import { createCourseWork, getCourse } from "./action";
+import { auth, signIn } from "../../../../../auth";
+import { getSession } from "./action";
+import { getToken } from "./action";
 import { redirect } from "next/navigation";
+export default async function Page() {
+  const token = await getToken();
 
-export default async function page() {
-  const store = cookies();
-  const token = store.get("access_token");
-
-  if (!token.value) {
+  if (!token) {
     redirect("/login");
   }
 
-  const session = await auth();
+  const session = await getSession();
 
   if (!session) {
     return (
       <>
-        <h1>Youve not login yet bruv</h1>
+        <h1>You’ve not logged in yet</h1>
         <form
           action={async () => {
             "use server";
             await signIn();
           }}
         >
-          <button type="submit">Sign In from google</button>
+          <button type="submit">Sign In from Google</button>
         </form>
       </>
     );
