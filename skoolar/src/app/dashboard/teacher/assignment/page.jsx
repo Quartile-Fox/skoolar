@@ -76,7 +76,7 @@ export default function TeacherAssignment() {
               </button>
             </div>
           </section>
-          <div className="relative mt-4 bg-black max-h-[400px] overflow-y-auto ">
+          <div className="relative mt-4  max-h-[400px] overflow-y-auto ">
             <div className="overflow-x-auto">
               <div className="border-b-2">
                 <table className="w-full min-w-full  rounded-2xl">
