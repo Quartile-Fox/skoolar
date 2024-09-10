@@ -68,7 +68,7 @@ const schemaCourseWorkInput = Joi.object({
   description: Joi.string().required().min(5),
   duedate: Joi.string().required(),
   duetime: Joi.string().required(),
-  course: Joi.string().required(),
+  courseName: Joi.string().required(),
 });
 
 export const createCourseWork = async (formData) => {
@@ -87,15 +87,20 @@ export const createCourseWork = async (formData) => {
   const description = formData?.get("description");
   const duedate = formData?.get("duedate");
   const duetime = formData?.get("duetime");
-  const course = formData?.get("course");
+  const courseData = formData?.get("course");
+  const courseId = courseData.split(",")[0];
+  const courseName = courseData.split(",")[1];
   const group = formData?.get("group");
+  // console.log(typeof course);
+  // console.log(course.split(",")[1]);
+  // console.log(course[1]);
 
   const parsedData = schemaCourseWorkInput.validate({
     title,
     description,
     duedate,
     duetime,
-    course,
+    courseName,
   });
   if (parsedData.error) {
     const errPath = parsedData.error.details[0].path[0];
@@ -154,7 +159,7 @@ export const createCourseWork = async (formData) => {
       auth: oauth2Client,
     });
     const response = await classroom.courses.courseWork.create({
-      courseId: parsedData.value.course,
+      courseId: courseId,
       requestBody: coursework,
     });
     const colRef = collection(db, "assignment");
@@ -162,9 +167,13 @@ export const createCourseWork = async (formData) => {
     addDoc(colRef, {
       courseId: response?.data.courseId,
       courseworkId: response?.data.id,
+      courseName: courseName,
       description: response?.data.description,
       dueDate: response?.data.dueDate,
-      dueTime: response?.data.dueTime,
+      dueTime: {
+        hours: splitDueTime[0],
+        minutes: splitDueTime[1],
+      },
       groupId: payload.GroupId,
       title: response?.data.title,
     });

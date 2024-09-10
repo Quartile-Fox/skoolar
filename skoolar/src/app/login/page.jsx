@@ -21,8 +21,8 @@ export default function Login() {
     });
 
     return () => {
-      signupButton.removeEventListener("click", () => {});
-      loginButton.removeEventListener("click", () => {});
+      signupButton.removeEventListener("click", () => { });
+      loginButton.removeEventListener("click", () => { });
     };
   }, []);
 

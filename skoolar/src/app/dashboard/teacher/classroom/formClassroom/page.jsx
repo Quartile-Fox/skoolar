@@ -34,7 +34,7 @@ export default function FormClassroomPage() {
             {courses?.map((course) => {
               if (course.courseState === "ACTIVE") {
                 return (
-                  <option value={course.id} key={course.id}>
+                  <option value={[course.id, course.name]} key={course.id}>
                     {course.name}
                   </option>
                 );
