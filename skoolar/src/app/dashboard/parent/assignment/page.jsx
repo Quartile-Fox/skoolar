@@ -31,7 +31,7 @@ export default function AssignmentPage() {
               <div className="flex flex-col ">
                 <section className="w-full py-2 px-4  border-b-[0.7px] border-slate-300 flex gap-6 items-center">
                   <p className="text-red-400 text-1xl">
-                    Wednesday <p className="flex justify-center text-2xl">26</p>
+                    Wednesday <span className="flex justify-center text-2xl">26</span>
                   </p>
                   <div className="h-[4rem] bg-slate-300 w-[1px]" />
                   <div className="flex w-full justify-between items-center">
@@ -43,7 +43,7 @@ export default function AssignmentPage() {
                 </section>
                 <section className="w-full py-2 px-4  border-b-[0.7px] border-slate-300 flex gap-6 items-center">
                   <p className="text-red-400 text-1xl">
-                    Wednesday <p className="flex justify-center text-2xl">26</p>
+                    Wednesday <span className="flex justify-center text-2xl">26</span>
                   </p>
                   <div className="h-[4rem] bg-slate-300 w-[1px]" />
                   <div className="flex w-full justify-between items-center">

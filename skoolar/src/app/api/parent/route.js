@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Joi from "joi";
-import { getParentOrUser } from "../../../db/models/Parent";
+import { getAllParents, getParentOrUser } from "../../../db/models/Parent";
 const schema = Joi.object({
   parentName: Joi.string().min(2).required(),
   parentName: Joi.string().required().min(2),
@@ -41,7 +41,7 @@ export async function GET(request) {
   const parent = await getAllParents();
   const id = request.headers.get("x-user-id");
   try {
-    const data = await getParentOrUser(id);
+    const data = await getAllParents();
     return NextResponse.json({
       statusCode: 200,
       message: "Success get data parent",

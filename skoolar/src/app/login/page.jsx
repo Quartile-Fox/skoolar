@@ -21,8 +21,8 @@ export default function Login() {
     });
 
     return () => {
-      signupButton.removeEventListener("click", () => {});
-      loginButton.removeEventListener("click", () => {});
+      signupButton.removeEventListener("click", () => { });
+      loginButton.removeEventListener("click", () => { });
     };
   }, []);
 
@@ -156,11 +156,11 @@ export default function Login() {
                   </div>
                 </fieldset>
                 <div className="forms_buttons">
-                  <input
-                    type="submit"
+                  <button type="submit"
                     defaultValue="Log In"
-                    className="forms_buttons-action"
-                  />
+                    className="forms_buttons-action">
+                    Login
+                  </button>
                 </div>
               </form>
               {/* Paren Login End */}
@@ -198,11 +198,12 @@ export default function Login() {
                   </div>
                 </fieldset>
                 <div className="forms_buttons">
-                  <input
-                    type="submit"
-                    defaultValue="Sign up"
-                    className="forms_buttons-action"
-                  />
+                  <button type="submit"
+                    defaultValue="Log In"
+                    className="forms_buttons-action">
+                    Login
+                  </button>
+
                 </div>
               </form>
               {/* School Login Form End */}
