@@ -7,7 +7,9 @@ const schema = Joi.object({
 });
 export async function POST(request) {
   const userId = request.headers.get("x-user-id");
-  const { groupName } = request.json();
+  const { name, parent_id, teacher_id } = request.json();
+  createdAt = new Date();
+  const dataObj = { name, parent_id, teacher_id, createdAt };
   try {
     const parsedData = schema.validate({ groupName, userId });
     if (parsedData.error) {

@@ -4,7 +4,6 @@ import { getMongoClientInstance } from "../../config/mongo";
 const DATABASE_NAME = process.env.DATABASE_NAME || "skoolar";
 const COLLECTION_GROUP = "group";
 
-// Function to get the database instance
 export const getDb = async () => {
   const client = await getMongoClientInstance();
   const db = client.db(DATABASE_NAME);
