@@ -44,6 +44,7 @@ export default function Group() {
         }));
     };
 
+
     const filteredStudents = students.filter((student) =>
         student.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -54,7 +55,7 @@ export default function Group() {
 
                 <div className="flex flex-1 flex-col ">
                     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-white px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-                        {/* Header code here */}
+
                     </header>
 
                     <main className="grid flex-1 items-start p-4 py-0 h-screen">
