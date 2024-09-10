@@ -6,7 +6,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "auth": "npx auth secret",
-    "build": "next build",
+    "build": "npm run auth && next build",
     "start": "next start"
   },
   "dependencies": {
