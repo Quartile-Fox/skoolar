@@ -57,13 +57,12 @@ export default function ParentAnnouncement() {
                   strokeLinejoin="round"
                 />
                 <g id="SVGRepo_iconCarrier">
-                  {" "}
                   <path
                     fill="none"
                     stroke="#006bf8"
                     strokeWidth="1.512"
                     d="M11,15 C14,15 19,19 19,19 L19,3 C19,3 14,7 11,7 C11,7 11,15 11,15 Z M5,15 L8,23 L12,23 L9,15 M19,14 C20.657,14 22,12.657 22,11 C22,9.343 20.657,8 19,8 M11,19 C11.9999997,18.9999994 14,18 14,16 M2,11 C2,7.88888889 3.7912,7 6,7 L11,7 L11,15 L6,15 C3.7912,15 2,14.1111111 2,11 Z"
-                  />{" "}
+                  />
                 </g>
               </svg>
               <span className="text-2xl text-black font-medium lg:text-nowrap">
@@ -73,15 +72,21 @@ export default function ParentAnnouncement() {
             <div className="h-[86%] w-full mt-5 overflow-y-auto px-4">
               <div className="flex flex-col gap-4 ">
                 {announcement.map((el, index) => (
-                  <Link href={`/dashboard/parent/announcement/${el.title}`}>
-                    <div className="flex justify-start items- gap-3 w-full h-[5rem] border-neutral-200 border-b-[0.3px]">
+                  <Link
+                    key={index}
+                    href={`/dashboard/parent/announcement/${el.title}`}
+                  >
+                    <div
+                      key={index}
+                      className="flex justify-start items- gap-3 w-full h-[5rem] border-neutral-200 border-b-[0.3px]"
+                    >
                       <section className="h-full flex items-start py-2">
                         <section className="w-4 h-4 rounded-full bg-blue-400"></section>
                       </section>
                       <section className="overflow-hidden relative mr-2">
                         <span className="text-black text-[15px] font-medium">
                           Finance
-                        </span>{" "}
+                        </span>
                         <span className="text-[#006bf8] text-[12px] absolute right-3">
                           17.30
                         </span>

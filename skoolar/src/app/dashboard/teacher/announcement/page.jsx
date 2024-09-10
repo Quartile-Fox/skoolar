@@ -74,8 +74,14 @@ export default function ParentAnnouncement() {
             <div className="h-[86%] w-full mt-5 overflow-y-auto px-4">
               <div className="flex flex-col gap-4 ">
                 {announcement.map((el, index) => (
-                  <Link href={`/dashboard/teacher/announcement/${el.title}`}>
-                    <div className="flex justify-start items- gap-3 w-full h-[5rem] border-neutral-200 border-b-[0.3px]">
+                  <Link
+                    key={index}
+                    href={`/dashboard/teacher/announcement/${el.title}`}
+                  >
+                    <div
+                      key={index}
+                      className="flex justify-start items- gap-3 w-full h-[5rem] border-neutral-200 border-b-[0.3px]"
+                    >
                       <section className="h-full flex items-start py-2">
                         <section className="w-4 h-4 rounded-full bg-blue-400"></section>
                       </section>
