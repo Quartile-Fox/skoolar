@@ -1,11 +1,10 @@
 "use client";
-
 import Image from "next/image";
 import illustration from "../../public/Untitled.svg";
 import illustration2 from "../../public/illustration_2.svg";
 import feature2 from "../../public/Feature5.svg";
 import Link from "next/link";
-import { BookOpen, Users, Trophy, ChevronRight } from "lucide-react";
+// import { BookOpen, Users, Trophy } from "lucide-react";
 import { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -275,7 +274,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start pl-3">
                     <div className="bg-blue-500 p-3 rounded-full mr-6">
-                      <Users className="w-6 h-6 text-blue-100" />
+                      {/* <Users className="w-6 h-6 text-blue-100" /> */}
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">
@@ -289,7 +288,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start pl-3">
                     <div className="bg-[#EC5A53] p-3 rounded-full mr-6">
-                      <BookOpen className="w-6 h-6  text-[#F7BDBA]" />
+                      {/* <BookOpen className="w-6 h-6  text-[#F7BDBA]" /> */}
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">
@@ -306,7 +305,7 @@ export default function Home() {
 
                   <div className="flex items-start pl-3">
                     <div className="bg-[#FFAB11] p-3 rounded-full mr-6">
-                      <Trophy className="w-6 h-6 text-[#FFDFA0]" />
+                      {/* <Trophy className="w-6 h-6 text-[#FFDFA0]" /> */}
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">
