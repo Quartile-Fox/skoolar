@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "install-deps": "npm install",
+    "auth": "npx auth-cli",
+    "build": "npm run install-deps && npm run auth && next build",
     "start": "next start",
     "lint": "next lint"
   },
