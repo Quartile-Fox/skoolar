@@ -4,10 +4,19 @@ import { useEffect, useState } from "react";
 import { getAllUser, getParent, getGroup, postStudent, postTeacher } from "./action";
 
 export default function TeacherStudentList() {
-  // State untuk daftar guru, murid, dan grup
-  const [teachers, setTeachers] = useState([]);
-  const [students, setStudents] = useState([]);
-  const [groups, setGroups] = useState([]);
+
+  // State untuk daftar guru dan murid
+  const [teachers, setTeachers] = useState([
+    { name: "Ms Lita", subject: "Math" },
+    { name: "Ms Rina", subject: "Science" },
+    { name: "Mr Fathan", subject: "History" },
+  ]);
+  const [students, setStudents] = useState([
+    { name: "Alice", grade: "6A" },
+    { name: "Bob", grade: "5A" },
+    { name: "Charlie", grade: "4C" },
+  ]);
+
 
   // State untuk modal guru dan murid
   const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
@@ -38,6 +47,7 @@ export default function TeacherStudentList() {
   const handleStudentInputChange = (e) => {
     setNewStudent({ ...newStudent, [e.target.name]: e.target.value });
   };
+  //
 
   // Fungsi untuk menambahkan guru
   const handleAddTeacher = async (e) => {
@@ -76,7 +86,7 @@ export default function TeacherStudentList() {
       <div className="flex ml-4 w-full bg-white rounded-2xl">
         <div className="flex flex-1 flex-col">
           <header className="sticky top-0 z-30 flex h-14 pt-7 pb-7 items-center gap-4 border-b bg-white px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-            <h1 className="text-xl font-semibold">Teachers & Students</h1>
+            <h1 className="text-lg font-medium">Teachers & Students</h1>
           </header>
 
           <main className="grid flex-1 items-start gap-4 pt-5 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -98,16 +108,17 @@ export default function TeacherStudentList() {
                       <thead>
                         <tr className="bg-gray-100 text-left text-sm font-medium text-gray-700">
                           <th className="border px-4 py-2">Name</th>
-                          <th className="border px-4 py-2">Class</th>
-                          <th className="border px-4 py-2">NIK</th>
+                          <th className="border px-4 py-2">Subject</th>
                         </tr>
                       </thead>
                       <tbody>
                         {teachers.map((teacher, index) => (
                           <tr key={index} className="text-sm text-gray-700">
                             <td className="border px-4 py-2">{teacher.name}</td>
-                            <td className="border px-4 py-2">{teacher.GroupId}</td>
-                            <td className="border px-4 py-2">{teacher.NIK}</td>
+                            <td className="border px-4 py-2">
+                              {teacher.subject}
+                            </td>
+
                           </tr>
                         ))}
                       </tbody>
@@ -130,19 +141,17 @@ export default function TeacherStudentList() {
                     <table className="min-w-full table-auto border-collapse">
                       <thead>
                         <tr className="bg-gray-100 text-left text-sm font-medium text-gray-700">
-                          <th className="border px-4 py-2">Student Name</th>
-                          <th className="border px-4 py-2">Parent Name</th>
-                          <th className="border px-4 py-2">NISN</th>
-                          <th className="border px-4 py-2">Class</th>
+                          <th className="border px-4 py-2">Name</th>
+                          <th className="border px-4 py-2">Grade</th>
                         </tr>
                       </thead>
                       <tbody>
                         {students.map((student, index) => (
                           <tr key={index} className="text-sm text-gray-700">
-                            <td className="border px-4 py-2">{student.studentName}</td>
-                            <td className="border px-4 py-2">{student.parentName}</td>
-                            <td className="border px-4 py-2">{student.NISN}</td>
-                            <td className="border px-4 py-2">{student.GroupId}</td>
+                            <td className="border px-4 py-2">{student.name}</td>
+                            <td className="border px-4 py-2">
+                              {student.grade}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -185,22 +194,54 @@ export default function TeacherStudentList() {
                     />
                   </div>
 
-                  <div className="flex justify-end gap-2">
-                    <button
-                      type="button"
-                      className="rounded-md bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-400"
-                      onClick={toggleTeacherModal}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
-                    >
-                      Add Teacher
-                    </button>
-                  </div>
-                </form>
+                <div className="mb-4">
+                  <label
+                    htmlFor="teacherName"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Teacher Name
+                  </label>
+                  <input
+                    type="text"
+                    id="teacherName"
+                    name="name"
+                    value={newTeacher.name}
+                    onChange={handleTeacherInputChange}
+                    className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2"
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="teacherSubject"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="teacherSubject"
+                    name="subject"
+                    value={newTeacher.subject}
+                    onChange={handleTeacherInputChange}
+                    className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2">
+                  <button
+                    className="rounded-md bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-400"
+                    onClick={toggleTeacherModal}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
+                    onClick={handleAddTeacher}
+                  >
+                    Add Teacher
+                  </button>
+                </div>
               </div>
             </div>
           )}
