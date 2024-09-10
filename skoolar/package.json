@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "lint": "next lint",
     "install-deps": "npm install",
     "auth": "npx auth secret",
     "build": "npm run install-deps && npm run auth && next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",
