@@ -106,10 +106,10 @@ export const createCourseWork = async (formData) => {
   }
 
   console.log(parsedData, "<< ini parsed data");
-  const splitDueDate = parsedData.value.duedate.split("-");
-  const splitDueTime = parsedData.value.duetime.split(":");
-  console.log(splitDueDate, "<< ini splitduedate");
-  console.log(splitDueTime, "<< ini splitduetime");
+
+  const concateDate = new Date(
+    parsedData.value.duedate + " " + parsedData.value.duetime
+  );
 
   if (!session || !session.accessToken) {
     //ini harusnya ngambil access token baru pake refresh token
@@ -140,13 +140,13 @@ export const createCourseWork = async (formData) => {
       materials: [],
       maxPoints: 100,
       dueDate: {
-        year: splitDueDate[0],
-        month: splitDueDate[1],
-        day: splitDueDate[2],
+        year: concateDate.getUTCFullYear(),
+        month: concateDate.getUTCMonth() + 1,
+        day: concateDate.getUTCDate(),
       },
       dueTime: {
-        hours: splitDueTime[0],
-        minutes: splitDueTime[1],
+        hours: concateDate.getUTCHours(),
+        minutes: concateDate.getUTCMinutes(),
       },
     };
     const classroom = google.classroom({

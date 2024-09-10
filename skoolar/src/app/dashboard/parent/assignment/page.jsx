@@ -1,5 +1,6 @@
 import SideBar from "../../../../components/parent/Sidebar";
-
+import { getAssignment } from "./action";
+await getAssignment();
 export default function AssignmentPage() {
   return (
     <>
