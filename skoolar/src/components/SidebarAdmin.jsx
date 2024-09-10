@@ -122,7 +122,7 @@ export default function SideBar() {
               </Link>
             </li>
             <li>
-              <Link href={"/dashboard/admin/chat"}>
+              {/* <Link href={"/dashboard/admin/chat"}>
                 <figure className="w-[3.3rem] h-[3.3rem] rounded-full bg-white flex justify-center items-center hover:bg-[#006bf8] transition-transform hover:translate-x-1 cursor-pointer hover:text-white">
                   <svg
                     width="35px"
@@ -151,7 +151,7 @@ export default function SideBar() {
                     </g>
                   </svg>
                 </figure>
-              </Link>
+              </Link> */}
             </li>
             <li>
               <Link href="/dashboard/admin/transaction">
