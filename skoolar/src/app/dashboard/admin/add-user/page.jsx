@@ -1,21 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { getGroup } from "./action"
 
 export default function Group() {
     const [products, setProducts] = useState([
-        { name: "6A", teacher: "Ms Lita", member: "12" },
-        { name: "5A", teacher: "Ms Rina", member: "12" },
-        { name: "4C", teacher: "Mr Fathan", member: "12" },
-        { name: "6A", teacher: "Ms Lita", member: "12" },
-        { name: "5A", teacher: "Ms Rina", member: "12" },
-        { name: "4C", teacher: "Mr Fathan", member: "12" },
-        { name: "6A", teacher: "Ms Lita", member: "12" },
-        { name: "5A", teacher: "Ms Rina", member: "12" },
-        { name: "4C", teacher: "Mr Fathan", member: "12" },
-        { name: "6A", teacher: "Ms Lita", member: "12" },
-        { name: "5A", teacher: "Ms Rina", member: "12" },
-        { name: "4C", teacher: "Mr Fathan", member: "12" },
     ]);
 
     const teachers = ["Ms Lita", "Ms Rina", "Mr Fathan"];
@@ -28,6 +18,13 @@ export default function Group() {
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
+
+    async function groupData(params) {
+        const data = await getGroup()
+        console.log(data);
+
+        setProducts(data, "ini data di client")
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -48,6 +45,11 @@ export default function Group() {
     const filteredStudents = students.filter((student) =>
         student.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    useEffect(() => {
+        groupData()
+    }, [])
+
 
     return (
         <>
@@ -82,10 +84,10 @@ export default function Group() {
                                                         {product.name}
                                                     </p>
                                                     <p className="text-sm text-gray-400">
-                                                        Teacher: {product.teacher}
+                                                        Teacher: {product.teacher_id}
                                                     </p>
                                                     <p className="text-sm text-gray-400">
-                                                        Member: {product.member}
+                                                        Member: {product.parent_id.lenght}
                                                     </p>
                                                     <div className="flex justify-end">
                                                         <button className="rounded-md border border-blue-600 px-4 mt-2 py-2 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-600 hover:text-white">
