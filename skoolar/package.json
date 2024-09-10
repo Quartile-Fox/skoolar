@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "install-deps": "npm install",
-    "auth": "npx auth-cli",
+    "auth": "npx auth secret",
     "build": "npm run install-deps && npm run auth && next build",
     "start": "next start",
     "lint": "next lint"
