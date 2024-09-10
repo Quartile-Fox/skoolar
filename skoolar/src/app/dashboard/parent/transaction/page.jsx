@@ -51,8 +51,8 @@ export default function Pembayaran() {
       const requestData = await response.json();
       window.snap.pay(requestData.token, {
         onSuccess: async function () {
-          const res = await updateTransaction(order_id);
-          console.log(res);
+          // const res = await updateTransaction(order_id);
+          // console.log(res);
           Swal.fire({
             icon: "success",
             title: response.data.message,
