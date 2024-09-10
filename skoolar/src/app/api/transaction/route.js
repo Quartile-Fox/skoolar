@@ -1,10 +1,13 @@
+"use server";
 import Midtrans from "midtrans-client";
 import {
   createTransaction,
   getTransactionByParentId,
+  updateTransaction,
 } from "../../../db/models/Transaction";
 import { NextResponse } from "next/server";
 import { generateUniqueOrderId } from "../../../db/utils/timestamp";
+import { updateStudentGroup } from "../../../db/models/Group";
 let snap = new Midtrans.Snap({
   isProduction: false,
   serverKey: process.env.SERVER_KEY_MIDTRANS,
@@ -36,12 +39,6 @@ export async function POST(request) {
 
   const order_id = generateUniqueOrderId();
 
-  const transaction = {
-    description,
-    amount,
-    parent_id,
-    due_date,
-  };
   let parameter = {
     transaction_details: {
       order_id: order_id,
@@ -49,11 +46,22 @@ export async function POST(request) {
     },
   };
 
-  const result = await createTransaction(transaction);
-  console.log(result);
-  const token = await snap.createTransactionToken(parameter);
+  // const result = await createTransaction(transaction);
 
+  const token = await snap.createTransactionToken(parameter);
   return Response.json({
     token,
+  });
+}
+
+export async function PATCH(request) {
+  // const parent_id = request.headers.get("x-user-id");
+  const order_id = request.json();
+
+  console.log(order_id, "ini order id yang di terima");
+  const result = updateTransaction(order_id);
+  console.log(result, " ini hasil update");
+  return Response.json({
+    result,
   });
 }

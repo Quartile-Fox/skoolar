@@ -36,3 +36,16 @@ export async function createTransaction() {
     throw error;
   }
 }
+
+export async function updateTransaction(order_id) {
+  const res = await fetch(`http://localhost:3000/api/transaction`, {
+    method: "PATCH",
+    headers: {
+      Coookie: cookies().toString(),
+    },
+    body: JSON.stringify(order_id),
+  });
+
+  const result = await res.json();
+  return result;
+}

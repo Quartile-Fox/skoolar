@@ -55,6 +55,7 @@ export const updateTransaction = async (order_id) => {
     const result = await db
       .collection(COLLECTION_TRANSACTION)
       .updateOne({ order_id }, { $set: { status: "paid" } });
+
     return result;
   } catch (error) {
     throw error;

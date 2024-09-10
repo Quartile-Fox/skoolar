@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import SideBar from "../../../../components/parent/Sidebar";
 import Link from "next/link";
 
-import { getTransactions } from "./action";
+import { getTransactions, updateTransaction } from "./action";
 import Swal from "sweetalert2";
+
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -34,11 +35,12 @@ export default function Pembayaran() {
     };
   }, []);
 
-  const checkout = async (description, amount, dueDate) => {
+  const checkout = async (description, amount, dueDate, order_id) => {
     const data = {
       description,
       amount,
       dueDate,
+      order_id,
     };
     try {
       const response = await fetch("/api/transaction", {
@@ -49,14 +51,8 @@ export default function Pembayaran() {
       const requestData = await response.json();
       window.snap.pay(requestData.token, {
         onSuccess: async function () {
-          const response = await fetch(
-            `http://localhost:3000/api/transaction`,
-            {
-              method: "POST",
-              body: JSON.stringify(data),
-            }
-          );
-
+          const res = await updateTransaction(order_id);
+          console.log(res);
           Swal.fire({
             icon: "success",
             title: response.data.message,
@@ -146,35 +142,44 @@ export default function Pembayaran() {
               </thead>
               <tbody className="text-black text-[15px]">
                 {dataTransaction?.map((transaction, index) => (
-                  <tr
-                    key={transaction._id}
-                    className="h-[3rem] border-neutral-300 border-b-2"
-                  >
-                    <td className="px-4 py-2">{index + 1}</td>
-                    <td className="px-4 py-2">{transaction.createdAt}</td>
-                    <td className="px-4 py-2">{transaction.description}</td>
-                    <td className="px-4 py-2">{transaction.dueDate}</td>
-                    <td className="px-4 py-2"> Rp.{transaction.amount}</td>
-                    <td className="text-red-500 px-4 py-2">
-                      {transaction.status}
-                    </td>
-                  </tr>
+                  <>
+                    <tr
+                      key={transaction._id}
+                      className="h-[3rem] border-neutral-300 border-b-2"
+                    >
+                      <td className="px-4 py-2">{index + 1}</td>
+                      <td className="px-4 py-2">{transaction.createdAt}</td>
+                      <td className="px-4 py-2">{transaction.description}</td>
+                      <td className="px-4 py-2">{transaction.dueDate}</td>
+                      <td className="px-4 py-2"> Rp.{transaction.amount}</td>
+                      <td className="text-red-500 px-4 py-2">
+                        {transaction.status}
+                      </td>
+                    </tr>
+                    <div className="w-full flex justify-end items-center gap-10 py-3 px-4 mt-3">
+                      <span className="text-black font-bold pl-10">Total</span>
+                      <span className="w-[10rem] text-black font-bold">
+                        {/* {formatCurrency(totalAmount)} */}
+                        Rp.{totalAmount}
+                      </span>
+                      <button
+                        onClick={() =>
+                          checkout(
+                            "payment",
+                            totalAmount,
+                            new Date(),
+                            transaction.order_id
+                          )
+                        }
+                        className="px-4 py-1 rounded-2xl bg-black font-bold text-white"
+                      >
+                        Pay Now
+                      </button>
+                    </div>
+                  </>
                 ))}
               </tbody>
             </table>
-            <div className="w-full flex justify-end items-center gap-10 py-3 px-4 mt-3">
-              <span className="text-black font-bold pl-10">Total</span>
-              <span className="w-[10rem] text-black font-bold">
-                {/* {formatCurrency(totalAmount)} */}
-                Rp.{totalAmount}
-              </span>
-              <button
-                onClick={() => checkout("payment", totalAmount, new Date())}
-                className="px-4 py-1 rounded-2xl bg-black font-bold text-white"
-              >
-                Pay Now
-              </button>
-            </div>
           </div>
         </div>
       </div>
