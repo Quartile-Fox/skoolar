@@ -7,7 +7,7 @@
     "lint": "next lint",
     "install-deps": "npm install",
     "auth": "npx auth secret",
-    "build": "npm run install-deps && npm run auth && next build",
+    "build": "npm run lint && npm run install-deps && npm run auth && next build",
     "start": "next start"
   },
   "dependencies": {
