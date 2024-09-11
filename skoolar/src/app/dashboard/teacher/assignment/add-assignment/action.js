@@ -74,6 +74,7 @@ const schemaCourseWorkInput = Joi.object({
 });
 
 export const createCourseWork = async (formData) => {
+  const session = await auth();
   const data = await getMe();
 
   const title = formData?.get("title");
@@ -101,17 +102,13 @@ export const createCourseWork = async (formData) => {
     );
   }
 
-  console.log(parsedData, "<< ini parsed data");
   const splitDueDate = parsedData.value.duedate.split("-");
   const splitDueTime = parsedData.value.duetime.split(":");
-  console.log(splitDueDate, "<< ini splitduedate");
-  console.log(splitDueTime, "<< ini splitduetime");
 
   if (!session || !session.accessToken) {
     //ini harusnya ngambil access token baru pake refresh token
-    return "Not authenticated";
-
-    // return session;
+    // return "Not authenticated";
+    redirect("/dashboard/teacher/assignment/add-assignment");
   }
 
   // const { payload } = await jwtVerify(
@@ -123,8 +120,8 @@ export const createCourseWork = async (formData) => {
     process.env.AUTH_GOOGLE_ID,
     process.env.AUTH_GOOGLE_SECRET
   );
+
   oauth2Client.setCredentials({ access_token: session.accessToken });
-  console.log(oauth2Client, "<< INI OAUTH2Client");
   const coursework = {
     title: title,
     description: description,
