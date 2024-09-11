@@ -33,10 +33,11 @@ export async function getSession() {
 }
 
 export const getCourse = async () => {
+  const session = await auth();
   if (!session || !session.accessToken) {
     //ini harusnya ngambil access token baru pake refresh token
     // return "Not authenticated";
-    return session;
+    redirect("/dashboard/teacher/assignment/add-assignment");
   }
 
   try {
