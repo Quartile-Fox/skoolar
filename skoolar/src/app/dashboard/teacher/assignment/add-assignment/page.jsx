@@ -12,7 +12,8 @@ export default async function Page() {
     redirect("/login");
   }
 
-  const session = await getSession();
+  const session = await auth();
+  // const session = await getSession();
 
   if (!session) {
     return (
