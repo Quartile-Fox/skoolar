@@ -12,24 +12,24 @@ export default async function Page() {
     redirect("/login");
   }
 
-  const session = await auth();
-  // const session = await getSession();
+  // const session = await auth();
+  // // const session = await getSession();
 
-  if (!session) {
-    return (
-      <>
-        <h1>You’ve not logged in yet</h1>
-        <form
-          action={async () => {
-            "use server";
-            await signIn();
-          }}
-        >
-          <button type="submit">Sign In from Google</button>
-        </form>
-      </>
-    );
-  }
+  // if (!session) {
+  //   return (
+  //     <>
+  //       <h1>Youve not logged in yet</h1>
+  //       <form
+  //         action={async () => {
+  //           "use server";
+  //           await signIn();
+  //         }}
+  //       >
+  //         <button type="submit">Sign In from Google</button>
+  //       </form>
+  //     </>
+  //   );
+  // }
 
   const courses = await getCourse();
 
