@@ -77,41 +77,38 @@ export async function getGroup(params) {
 }
 
 export async function postStudent(formData) {
-  try {
-    console.log("haloo masuk action postTeacher");
+  console.log("haloo masuk action postTeacher");
 
-    const parentName = formData.get("parentName");
-    const password = formData.get("password");
-    const email = formData.get("email");
-    const studentName = formData.get("studentName");
-    const NISN = formData.get("NISN");
-    const GroupId = formData.get("GroupId");
-    const SchoolId = "66d76256160df0cce63a8382";
+  const parentName = formData.get("parentName");
+  const password = formData.get("password");
+  const email = formData.get("email");
+  const studentName = formData.get("studentName");
+  const NISN = formData.get("NISN");
+  const GroupId = formData.get("GroupId");
+  const SchoolId = "66d76256160df0cce63a8382";
 
-    const payload = {
-      NISN,
-      password,
-      email,
-      parentName,
-      studentName,
-      SchoolId,
-      GroupId,
-    };
-    // console.log(payload, "iniii di ekyongg student");
+  const payload = {
+    NISN,
+    password,
+    email,
+    parentName,
+    studentName,
+    SchoolId,
+    GroupId,
+  };
+  // console.log(payload, "iniii di ekyongg student");
 
-    const newStudent = await createParent(payload);
-    // console.log(newStudent);
+  const newStudent = await createParent(payload);
+  // console.log(newStudent);
 
-    console.log("success add student");
+  console.log("success add student");
 
-    await updateStudentGroup(GroupId, newStudent.insertedId);
+  await updateStudentGroup(GroupId, newStudent.insertedId);
 
-    console.log("success add to group");
+  console.log("success add to group");
 
-    return { success: true };
-  } catch (error) {
-    console.log(error);
-  }
+  revalidatePath("/dashboard/admin/list-user");
+  return { success: true };
 }
 
 export async function GetTeachersClass(params) {
