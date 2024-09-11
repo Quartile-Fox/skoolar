@@ -15,6 +15,7 @@ export default async function Page() {
   const session = await auth();
   // const session = await getSession();
 
+  let courses;
   if (!session) {
     return (
       <>
@@ -29,9 +30,9 @@ export default async function Page() {
         </form>
       </>
     );
+  } else {
+    courses = await getCourse();
   }
-
-  const courses = await getCourse();
 
   return (
     <>
