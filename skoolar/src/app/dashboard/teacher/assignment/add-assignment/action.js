@@ -75,6 +75,13 @@ const schemaCourseWorkInput = Joi.object({
 
 export const createCourseWork = async (formData) => {
   const session = await auth();
+
+  if (!session || !session.accessToken) {
+    //ini harusnya ngambil access token baru pake refresh token
+    // return "Not authenticated";
+    redirect("/dashboard/teacher/assignment");
+  }
+
   const data = await getMe();
 
   const title = formData?.get("title");
@@ -104,12 +111,6 @@ export const createCourseWork = async (formData) => {
 
   const splitDueDate = parsedData.value.duedate.split("-");
   const splitDueTime = parsedData.value.duetime.split(":");
-
-  if (!session || !session.accessToken) {
-    //ini harusnya ngambil access token baru pake refresh token
-    // return "Not authenticated";
-    redirect("/dashboard/teacher/assignment/add-assignment");
-  }
 
   // const { payload } = await jwtVerify(
   //   access_token.value,
