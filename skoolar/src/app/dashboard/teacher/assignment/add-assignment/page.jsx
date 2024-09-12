@@ -1,19 +1,14 @@
-import { cookies } from "next/headers";
 import { createCourseWork, getCourse, getAllGroup } from "./action";
 import { auth, signIn, signOut } from "../../../../../auth";
-import { redirect } from "next/navigation";
 import TeacherSideBar from "../../../../../components/teacher/Sidebar";
 
 export default async function page() {
-  const store = cookies();
-  const token = store.get("access_token");
-
-  if (!token.value) {
-    redirect("/login");
-  }
+  // if (!token) {
+  //   redirect("/login");
+  // }
 
   const session = await auth();
-
+  let courses;
   if (!session) {
     return (
       <>
@@ -36,9 +31,9 @@ export default async function page() {
         </div>
       </>
     );
+  } else {
+    courses = await getCourse();
   }
-
-  const courses = await getCourse();
 
   return (
     <>
@@ -75,7 +70,10 @@ export default async function page() {
           </form>
         </div> */}
         <div className="w-[90%]  rounded-3xl px-10 py-5 overflow-y-auto flex justify-center items-center">
-          <form className="w-full max-w-md space-y-6 bg-white p-8 rounded-lg shadow-xl">
+          <form
+            action={createCourseWork}
+            className="w-full max-w-md space-y-6 bg-white p-8 rounded-lg shadow-xl"
+          >
             <h2 className="text-2xl font-bold text-neutral-600 mb-6">
               Add Coursework
             </h2>

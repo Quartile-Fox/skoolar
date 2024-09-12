@@ -4,7 +4,6 @@ import { doLogout } from "../../app/login/action";
 export default function TeacherSideBar() {
   return (
     <>
-      {" "}
       <div className="w-full flex flex-col max-w-[7rem] h-full rounded-3xl bg-white shadow-xl py-5">
         <div className="w-full h-full flex justify-evenly items-center overflow-y-auto overflow-x-hidden ">
           <ul className="text-black flex flex-col items-center gap-y-10 mt-10">
@@ -106,7 +105,7 @@ export default function TeacherSideBar() {
               </Link>
             </li>
 
-            <li>
+            {/* <li>
               <Link href="/dashboard/teacher/announcement">
                 <figure className="w-[3.3rem] h-[3.3rem] rounded-full bg-white flex justify-center items-center hover:bg-[#006bf8] transition-transform hover:translate-x-1 cursor-pointer hover:text-white">
                   <svg
@@ -123,18 +122,18 @@ export default function TeacherSideBar() {
                       strokeLinejoin="round"
                     />
                     <g id="SVGRepo_iconCarrier">
-                      {" "}
+                      
                       <path
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="1.512"
                         d="M11,15 C14,15 19,19 19,19 L19,3 C19,3 14,7 11,7 C11,7 11,15 11,15 Z M5,15 L8,23 L12,23 L9,15 M19,14 C20.657,14 22,12.657 22,11 C22,9.343 20.657,8 19,8 M11,19 C11.9999997,18.9999994 14,18 14,16 M2,11 C2,7.88888889 3.7912,7 6,7 L11,7 L11,15 L6,15 C3.7912,15 2,14.1111111 2,11 Z"
-                      />{" "}
+                      />
                     </g>
                   </svg>
                 </figure>
               </Link>
-            </li>
+            </li> */}
             <li>
               <button onClick={() => doLogout()}>
                 <figure className="w-[3.3rem] h-[3.3rem] rounded-full bg-white flex justify-center items-center hover:bg-[#006bf8] transition-transform hover:translate-x-1 cursor-pointer hover:text-white">

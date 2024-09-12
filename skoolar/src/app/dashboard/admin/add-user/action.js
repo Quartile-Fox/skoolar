@@ -1,14 +1,20 @@
 "use server";
 
-import { createGroup } from "../../../../db/models/Group";
+import { ObjectId } from "mongodb";
+import { createGroup, groupWithName } from "../../../../db/models/Group";
+import { updateGroupParent } from "../../../../db/models/Parent";
+import { updateGroupTeacher } from "../../../../db/models/User";
 
 export async function getGroup(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/getOneGroup", {
-      headers: {
-        Cookie: cookies().toString(),
-      },
-    });
+    const response = await fetch(
+      "https://skoolar-app.vercel.app/api/getOneGroup",
+      {
+        headers: {
+          Cookie: cookies().toString(),
+        },
+      }
+    );
     const { data } = await response.json();
     // console.log(data, "data groups");
 
@@ -26,9 +32,30 @@ export async function postGroup(formData) {
     const teacher_id = formData.get("teacher_id");
     const parent_id = JSON.parse(formData.get("parent_id"));
 
-    const payload = { name, teacher_id, parent_id };
+    const parentIds = [];
+    parent_id.forEach((value, key) => {
+      parentIds.push(new ObjectId(value));
+    });
 
-    await createGroup(payload);
+    const payload = {
+      name,
+      teacher_id: new ObjectId(teacher_id),
+      parent_id: parentIds,
+    };
+
+    console.log(payload);
+    const newGroup = await createGroup(payload);
+
+    // console.log(newGroup, "<<<<<<<<<<<<<<<< idnya");
+
+    for (const parentId of parent_id) {
+      await updateGroupParent(newGroup, parentId);
+    }
+    console.log("success update parent");
+
+    const result = await updateGroupTeacher(newGroup, teacher_id);
+    console.log("success update User", result);
+
     return { success: true };
   } catch (error) {}
 }

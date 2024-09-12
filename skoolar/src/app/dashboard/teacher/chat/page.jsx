@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ChatRoom from "../../../../components/parent/ChatRoom";
-import ChatBox from "../../../../components/parent/Chatbox";
+import ChatBox from "../../../../components/parent/ChatBox";
 import { getAllGroup } from "./action";
 import TeacherSideBar from "../../../../components/teacher/Sidebar";
 export default async function TeacherClassroom() {
@@ -31,13 +31,13 @@ export default async function TeacherClassroom() {
                 );
               })}
             </div>
-            <div>
+            {/* <div>
               <p className="ml-8 mt-7 mb-2 text-xs text-neutral-400">
                 Personal Message
               </p>
               <ChatBox />
               <ChatBox />
-            </div>
+            </div> */}
           </div>
           <div className="w-full bg-white ml-0 rounded-2xl rounded-l-none">
             <div className="w-full h-full flex items-center justify-center">

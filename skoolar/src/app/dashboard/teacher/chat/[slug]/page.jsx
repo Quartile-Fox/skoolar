@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ChatBox from "../../../../../components/parent/Chatbox";
+import ChatBox from "../../../../../components/parent/ChatBox";
 import ChatRoom from "../../../../../components/parent/ChatRoom";
 import { getAllGroup } from "../action";
 import HeaderChat from "../../../../../components/parent/HeaderChat";
@@ -32,13 +32,13 @@ export default async function ParentDetailPage({ params }) {
                 );
               })}
             </div>
-            <div>
+            {/* <div>
               <p className="ml-8 mt-7 mb-2 text-xs text-neutral-400">
                 Personal Message
               </p>
               <ChatBox />
               <ChatBox />
-            </div>
+            </div> */}
           </div>
           <div className="w-full bg-white ml-0 rounded-2xl rounded-l-none">
             <div className="border-b border-neutral-200 py-2 flex justify-start items-center h-[11%]">

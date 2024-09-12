@@ -15,9 +15,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // === ganti ===
 // ganti session jadi adaptor
-const session = await auth();
 
 export const getCourse = async () => {
+  const session = await auth();
   if (!session || !session.accessToken) {
     //ini harusnya ngambil access token baru pake refresh token
     // return "Not authenticated";
@@ -51,13 +51,14 @@ export const getAllGroup = async () => {
 
 const schemaCourseWorkInput = Joi.object({
   title: Joi.string().required().min(2),
-  description: Joi.string().required().min(5),
+  description: Joi.string().required(),
   duedate: Joi.string().required(),
   duetime: Joi.string().required(),
   courseName: Joi.string().required(),
 });
 
 export const createCourseWork = async (formData) => {
+  const session = await auth();
   const data = await getMe();
 
   const title = formData?.get("title");

@@ -79,3 +79,37 @@ export const getParentById = async (id) => {
     .findOne({ _id: new ObjectId(id) });
   return parent;
 };
+
+export const updateGroupParent = async (newGroupId, ParentId) => {
+  // console.log(newGroupId, ParentId, "<<<<<<<<<<<< parentt model");
+
+  const db = await getDb();
+  const collection = db.collection(COLLECTION_PARENT);
+
+  const result = await collection.updateOne(
+    { _id: new ObjectId(ParentId) },
+    { $push: { GroupId: newGroupId } }
+  );
+
+  return result;
+};
+
+export const parentWithGroup = async () => {
+  const db = await getDb();
+  const collection = db.collection(COLLECTION_PARENT);
+
+  const agg = [
+    {
+      $lookup: {
+        from: "group",
+        localField: "GroupId",
+        foreignField: "_id",
+        as: "groups",
+      },
+    },
+  ]
+
+  const user = await collection.aggregate(agg).toArray();
+  return user;
+
+}
