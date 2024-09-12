@@ -1,19 +1,14 @@
-import { cookies } from "next/headers";
 import { createCourseWork, getCourse, getAllGroup } from "./action";
 import { auth, signIn, signOut } from "../../../../../auth";
-import { redirect } from "next/navigation";
 import TeacherSideBar from "../../../../../components/teacher/Sidebar";
 
 export default async function page() {
-  const store = cookies();
-  const token = store.get("access_token");
-
-  if (!token) {
-    redirect("/login");
-  }
+  // if (!token) {
+  //   redirect("/login");
+  // }
 
   const session = await auth();
-
+  let courses;
   if (!session) {
     return (
       <>
@@ -36,9 +31,9 @@ export default async function page() {
         </div>
       </>
     );
+  } else {
+    courses = await getCourse();
   }
-
-  const courses = await getCourse();
 
   return (
     <>

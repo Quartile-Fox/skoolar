@@ -5,6 +5,7 @@ import { getTranscation, postNewTransaction } from "./action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { func } from "joi";
+import { useRouter } from "next/navigation";
 
 const TuitionPaymentStatusPage = () => {
   const [students, setStudents] = useState([]);
@@ -13,6 +14,7 @@ const TuitionPaymentStatusPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const fetchData = async () => {
     const studentsData = await getParent();
@@ -37,8 +39,9 @@ const TuitionPaymentStatusPage = () => {
     const formData = new FormData(event.target);
     const result = await postNewTransaction(formData);
 
+    await fetchData();
     if (result.success) {
-      await fetchData();
+      // await fetchData();
       toggleModal();
       toast("Succes Add New Transaction", {
         position: "top-left",
@@ -54,6 +57,8 @@ const TuitionPaymentStatusPage = () => {
       console.error("Error adding Student:", result.error);
       // Anda bisa menambahkan notifikasi error di sini jika diperlukan
     }
+    router.refresh();
+
     setIsLoading(false);
   };
 

@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { userWithGroup } from "../../../db/models/User";
 
+export const dynamic = "force-dynamic";
+// 'auto' | 'force-dynamic' | 'error' | 'force-static'
+
 export async function GET() {
   try {
     const data = await userWithGroup();

@@ -12,8 +12,10 @@ import {
 } from "./action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 export default function TeacherStudentList() {
   // State untuk daftar guru dan murid
+  const router = useRouter();
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
   const [groups, setGroups] = useState([]);
@@ -32,7 +34,7 @@ export default function TeacherStudentList() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isLoading]);
 
   // State untuk modal guru dan murid
   const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
@@ -56,13 +58,11 @@ export default function TeacherStudentList() {
   const postTeachers = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-
     const formData = new FormData(event.target);
     const result = await postTeacher(formData);
-
+    await fetchData(); // Refresh data after adding teacher
     if (result.success) {
-      await fetchData();
-      toggleTeacherModal(); // Tutup modal jika berhasil
+      toggleTeacherModal();
       toast("Success Add Teacher to School", {
         position: "top-left",
         autoClose: 5000,
@@ -73,9 +73,10 @@ export default function TeacherStudentList() {
         progress: undefined,
         theme: "light",
       });
+      router.refresh();
     } else {
       console.error("Error adding teacher:", result.error);
-      // Anda bisa menambahkan notifikasi error di sini jika diperlukan
+      await fetchData();
     }
     setIsLoading(false);
   };
@@ -85,10 +86,9 @@ export default function TeacherStudentList() {
     setIsLoading(true);
     const formData = new FormData(event.target);
     const result = await postStudent(formData);
-
+    await fetchData(); // Refresh data after adding student
     if (result.success) {
-      await fetchData();
-      toggleStudentModal(); // Tutup modal jika berhasil
+      toggleStudentModal();
       toast("Success Add Student to School", {
         position: "top-left",
         autoClose: 5000,
@@ -99,9 +99,9 @@ export default function TeacherStudentList() {
         progress: undefined,
         theme: "light",
       });
+      router.refresh();
     } else {
       console.error("Error adding Student:", result.error);
-      // Anda bisa menambahkan notifikasi error di sini jika diperlukan
     }
     setIsLoading(false);
   };

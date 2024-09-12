@@ -113,7 +113,7 @@ async function createTransaction(
 
 export async function getAllUser(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/user", {
+    const response = await fetch("https://skoolar-app.vercel.app/api/user", {
       headers: {
         Cookie: cookies().toString(),
       },
@@ -129,7 +129,7 @@ export async function getAllUser(params) {
 
 export async function getParent(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/parents", {
+    const response = await fetch("https://skoolar-app.vercel.app/api/parents", {
       headers: {
         Cookie: cookies().toString(),
       },
@@ -144,11 +144,14 @@ export async function getParent(params) {
 
 export async function getGroup(params) {
   try {
-    const response = await fetch("http://localhost:3000/api/getOneGroup", {
-      headers: {
-        Cookie: cookies().toString(),
-      },
-    });
+    const response = await fetch(
+      "https://skoolar-app.vercel.app/api/getOneGroup",
+      {
+        headers: {
+          Cookie: cookies().toString(),
+        },
+      }
+    );
     const { data } = await response.json();
     // console.log(data, "data groups di list0user");
 
@@ -160,13 +163,16 @@ export async function getGroup(params) {
 
 export async function getGroupTeacher(groupId) {
   try {
-    const res = await fetch(`http://localhost:3000/api/group/${groupId}`, {
-      cache: "no-store",
-      method: "GET",
-      headers: {
-        Cookie: cookies().toString(),
-      },
-    });
+    const res = await fetch(
+      `https://skoolar-app.vercel.app/api/group/${groupId}`,
+      {
+        cache: "no-store",
+        method: "GET",
+        headers: {
+          Cookie: cookies().toString(),
+        },
+      }
+    );
     return await res.json();
   } catch (error) {
     throw error;

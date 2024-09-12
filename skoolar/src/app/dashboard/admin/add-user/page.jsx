@@ -5,6 +5,7 @@ import { getAllUser, getGroup, getParent } from "../list-user/action";
 import { getGroupWithName, postGroup } from "./action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 export default function Group() {
   const [products, setProducts] = useState([]);
   const [students, setStudents] = useState([]);
@@ -15,6 +16,7 @@ export default function Group() {
   const [searchTerm, setSearchTerm] = useState("");
   const [teacherSearchTerm, setTeacherSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const fetchData = async () => {
     const groupsData = await getGroup();
@@ -64,8 +66,8 @@ export default function Group() {
     formData.set("parent_id", JSON.stringify(parentIds));
     const result = await postGroup(formData);
 
+    await fetchData();
     if (result.success) {
-      await fetchData();
       toggleModal();
       toast("Success Create New Group", {
         position: "top-left",
@@ -80,6 +82,8 @@ export default function Group() {
     } else {
       console.error("Error adding Group:", result.error);
     }
+    router.refresh();
+
     setIsLoading(false);
   };
 

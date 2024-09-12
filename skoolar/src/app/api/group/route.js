@@ -8,6 +8,7 @@ const schema = Joi.object({
   groupName: Joi.string().required().min(4).max(30),
   userId: Joi.string().required(),
 });
+
 export async function POST(request) {
   const userId = request.headers.get("x-user-id");
   const { groupName } = request.json();
@@ -20,7 +21,7 @@ export async function POST(request) {
         data: [],
       });
     }
-    const data = createGroup();
+    const data = await createGroup();
     return NextResponse.json({
       statusCode: 201,
       message: "Succes Created Group!",
@@ -61,36 +62,6 @@ export async function GET(request) {
       statusCode: 500,
       message: "Internal server error!",
       data: [],
-    });
-  }
-}
-
-export async function DELETE() {
-  const userId = request.headers.get("x-user-id");
-  try {
-    if (!userId) {
-      return (
-        NextResponse.json({
-          statusCode: 400,
-          message: "Invalid user ID",
-          data: [],
-          error: "BAD REQUEST",
-        }),
-        { status: 400 }
-      );
-    }
-
-    const data = "ini data";
-    return NextResponse.json({
-      statusCode: 200,
-      message: "Success leave group",
-      data,
-    });
-  } catch (error) {
-    return NextResponse.json({
-      statusCode: 500,
-      message: "Internal server error",
-      data,
     });
   }
 }

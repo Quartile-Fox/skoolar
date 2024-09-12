@@ -1,6 +1,9 @@
-"use server";
+// "use server";
 import { NextResponse } from "next/server";
-import {getAllTransaction} from "../../../db/models/Transaction"
+import { getAllTransaction } from "../../../db/models/Transaction";
+
+export const dynamic = "force-dynamic";
+// 'auto' | 'force-dynamic' | 'error' | 'force-static'
 
 export async function GET() {
   try {
